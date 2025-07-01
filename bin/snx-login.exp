@@ -1,0 +1,18 @@
+#!/usr/bin/expect -f
+
+# parse arguments, the first argument is a file containing the password
+
+if {[llength $argv] != 1} {
+    puts "Usage: snx-login.exp <password_file>"
+    exit 1
+}
+
+set timeout -1
+set password_file [lindex $argv 0]
+set password [read [open "$password_file" r]]
+puts $password
+
+spawn snx
+expect "Please enter your password:"
+send -- "$password\r"
+expect eof

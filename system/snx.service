@@ -1,0 +1,12 @@
+[Unit]
+Description=SNX Service
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory=/etc/snx
+ExecStart=/bin/snx-login.exp /root/snx-password.txt
+ExecStop=/bin/snx -d
+
+[Install]
+WantedBy=multi-user.target
